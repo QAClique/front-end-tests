@@ -1,17 +1,32 @@
 {
-  "name": "globe",
+  "name": "test-pyramid-e2e",
+  "version": "0.1.0",
+  "description": "Test Pyramid Presentation E2E test examples",
   "type": "module",
-  "devDependencies": {
+  "scripts": {
+    "wdio": "wdio run ./wdio.conf.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/QAClique/test-pyramid-e2e"
+  },
+  "keywords": [
+    "E2E",
+    "Webdriver.io",
+    "Pyramid"
+  ],
+  "author": "QA Clique",
+  "license": "ISC",
+  "dependencies": {
     "@wdio/cli": "^8.15.6",
     "@wdio/junit-reporter": "^8.15.6",
     "@wdio/local-runner": "^8.15.6",
     "@wdio/mocha-framework": "^8.15.6",
-    "@wdio/spec-reporter": "^8.15.6",
-    "eslint": "^8.56.0",
-    "eslint-config-airbnb": "^19.0.4",
-    "eslint-config-airbnb-typescript": "^18.0.0"
+    "@wdio/spec-reporter": "^8.15.6"
   },
-  "scripts": {
-    "wdio": "wdio run ./wdio.conf.js"
+  "devDependencies": {
+    "eslint": "^8.57.1",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "gplint": "2.3.0"
   }
 }
