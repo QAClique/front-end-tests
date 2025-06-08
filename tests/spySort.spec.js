@@ -1,4 +1,4 @@
-describe("Sort Mutual Funds Market Leaders page on Globe And Mail website", () => {
+describe("Spy Sort Mutual Funds Market Leaders page on Globe And Mail website", () => {
   before(async () => {
     await browser.url("https://www.theglobeandmail.com/investing/markets/funds/market-leaders");
   });
@@ -10,7 +10,6 @@ describe("Sort Mutual Funds Market Leaders page on Globe And Mail website", () =
     await browser.pause(1000);
     // Show the request body
     console.log(JSON.parse(mock.calls[0].postData));
-    // Show the response body
-    console.log(mock.calls[0].body);
+    // The response is also spied, but since checking response is an API test, we will do nothing with it here
   });
 });

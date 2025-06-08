@@ -1,6 +1,6 @@
-describe("Spy Sort Mutual Funds Market Leaders page on Globe And Mail website", () => {
+describe("Spy sort of Mutual Funds Market page on Globe And Mail website", () => {
   before(async () => {
-    await browser.url("https://www.theglobeandmail.com/investing/markets/funds/market-leaders");
+    await browser.url("https://www.theglobeandmail.com/investing/markets/funds");
     // Clear the adblocker popup if present
     const adblockerCloseButton = await $("button=Continue without supporting this time");
     await browser.pause(2500);
@@ -14,8 +14,8 @@ describe("Spy Sort Mutual Funds Market Leaders page on Globe And Mail website", 
     // Click on the 'Last' column header to sort the table
     await $("th[field='lastPrice']").click();
     await browser.pause(1000);
-    // Show the request body
-    console.log(JSON.parse(mock.calls[0].postData));
-    // The response is also spied, but since checking response is an API test, we will do nothing with it here
+    // Show the spied calls - there will be none as the sorting was done by the UI, not the API
+    console.log("Spied API calls:");
+    console.log(mock.calls);
   });
 });
