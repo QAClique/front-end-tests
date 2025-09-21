@@ -29,6 +29,7 @@ describe('Local Sort Mutual Funds Leaders', () => {
       const cell = await row.$('td[data-testid="lastPrice"]');
       const text = await cell.getText();
       return parseFloat(text);
+      // If we sorted on Change or % Change columns, this would be more complex because 0 value is listed as "unch" which sorts badly!
     });
 
     const sortedValues = [...displayedValues].sort((a, b) => a - b);
