@@ -9,8 +9,8 @@ describe('Local Sort Mutual Funds Leaders', () => {
   it('should NOT fire API call to sort on "lastPrice" field', async () => {
     const mock = await browser.mock('http://localhost:5174/api/funds', { method: 'post' });
     await MutualFundsTables.getColumnHeader('lastPrice').click();
-    // Wait a bit for the request to be captured
-    await browser.pause(500);
+    // There will be no API calls, so we cannot wait for a response without causing a timeout. We still wait a bit to be sure no call is made
+    await browser.pause(1000);
     assert(mock.calls.length === 0, 'Expected: no API call is made but there was');
   });
 
