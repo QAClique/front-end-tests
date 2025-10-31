@@ -11,8 +11,7 @@ describe('Spy API Sort Mutual Funds Leaders', () => {
   it('should fire API call to sort on "lastPrice" field', async () => {
     const mock = await browser.mock('http://localhost:5174/api/funds', { method: 'post' });
     await MutualFundsTables.getColumnHeader('lastPrice').click();
-    // Wait a bit for the request to be captured
-    await browser.pause(500);
+    await mock.waitForResponse();
     requestBody = JSON.parse(mock.calls[0].postData);
     console.log(requestBody);
     assert(requestBody.orderBy === 'lastPrice',

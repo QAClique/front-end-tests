@@ -32,7 +32,7 @@ import MutualFundsTables from '../pages/mutualFundsTable.page.js';
         fetchResponse: false
       });
       await MutualFundsTables.open(page);
-      await browser.pause(500);
+      await mock.waitForResponse();
       apiDataLength = mock.calls[0].body.data ? mock.calls[0].body.data.length : 0;
       numOfRows = await MutualFundsTables.getNumberOfFundsDisplayed();
     });
