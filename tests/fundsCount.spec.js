@@ -11,7 +11,7 @@ describe('Funds Count', () => {
     mock = await browser.mock('http://localhost:5174/api/funds', { method: 'post' });
     await MutualFundsTables.open('api-sort');
     fundsPerPage = await MutualFundsTables.getNumberOfFunds();
-    await browser.pause(500);
+    await mock.waitForResponse();
     apiData = mock.calls[0].body.data;
     numOfRows = await MutualFundsTables.getNumberOfFundsDisplayed();
   });

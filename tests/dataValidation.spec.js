@@ -11,7 +11,7 @@ import MutualFundsTables from '../pages/mutualFundsTable.page.js';
     before(async () => {
       mock = await browser.mock('http://localhost:5174/api/funds', { method: 'post' });
       await MutualFundsTables.open(page);
-      await browser.pause(500);
+      await mock.waitForResponse();
       apiData = mock.calls[0].body.data;
       numOfRows = await MutualFundsTables.getNumberOfFundsDisplayed();
       randomRow = Math.floor(Math.random() * numOfRows);
