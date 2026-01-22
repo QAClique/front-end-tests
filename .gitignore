@@ -2,11 +2,11 @@
 
 # dependencies
 /node_modules
-/.pnp
-.pnp.js
-
-# testing
+/wdio/node_modules
+/playwright/node_modules
 /coverage
+/playwright/playwright-report
+/playwright/test-results
 
 # next.js
 /.next/
