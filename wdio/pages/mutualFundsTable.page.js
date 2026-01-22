@@ -1,6 +1,5 @@
-import Page from './page.js';
-
-class MutualFundsTablePage extends Page {
+class MutualFundsTablePage {
+  get spinner()            { return $('div.loading-overlay > div.spinner'); }
   get numberOfFundsField() { return $('[data-testid="number-of-funds-select"]'); }
   get headerRow()          { return $('thead > tr'); }
   get columnHeaders()      { return $$('thead > tr > th'); }
@@ -15,7 +14,8 @@ class MutualFundsTablePage extends Page {
    * @param {string} path - The path to the page
    */
   async open(path) {
-    await super.open(path);
+    await browser.setWindowSize(1440, 1024);
+    await browser.url(path);
     await this.spinner.waitForDisplayed({ reverse: true });
     this.columnMappings = await this.columnHeaders.map(async (el) => el.getAttribute('data-testid'));
   }
