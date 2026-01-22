@@ -2,12 +2,11 @@ import { test, expect } from '@playwright/test';
 import MutualFundsTablePage from '../pages/mutualFundsTable.page.js';
 
 test.describe('Funds Count', () => {
-  test('validate funds count', async ({ page }) => {
+  test('validate funds count', async ({ page }, testInfo) => {
     const mutualFundsTable = new MutualFundsTablePage(page);
 
-    const responsePromise = page.waitForResponse(
-      (response) => response.url().includes('http://localhost:5174/api/funds') && response.request().method() === 'POST'
-    );
+    const { apiFundsUrl } = testInfo.project.use;
+    const responsePromise = page.waitForResponse((response) => response.url().startsWith(apiFundsUrl) && response.request().method() === 'POST');
 
     await mutualFundsTable.open('api-sort');
     const fundsPerPage = await mutualFundsTable.getNumberOfFunds();

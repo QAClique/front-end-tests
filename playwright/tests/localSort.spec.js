@@ -9,18 +9,19 @@ test.describe('Local Sort Mutual Funds Leaders', () => {
     await mutualFundsTable.open('local-sort');
   });
 
-  test('local sort on lastPrice field', async ({ page }) => {
+  test('local sort on lastPrice field', async ({ page }, testInfo) => {
     await test.step('verify NO API call is made when clicking column header', async () => {
       let apiCallMade = false;
 
+      const { apiFundsUrl } = testInfo.project.use;
       page.once('request', (request) => {
-        if (request.url().includes('http://localhost:5174/api/funds') && request.method() === 'POST') {
+        if (request.url().startsWith(apiFundsUrl) && request.method() === 'POST') {
           apiCallMade = true;
         }
       });
 
       await mutualFundsTable.getColumnHeader('lastPrice').click();
-      // There will be no API calls, so we cannot wait for a response without causing a test timeout. We still wait a bit to be sure no call is made
+      // There will be no API calls, so we cannot wait for a response - we wait a fixed time to confirm no call is made
       await page.waitForTimeout(1000);
 
       expect(apiCallMade).toBeFalsy();
@@ -45,6 +46,7 @@ test.describe('Local Sort Mutual Funds Leaders', () => {
           const cell = row.locator('td[data-testid="lastPrice"]');
           const text = await cell.textContent();
           return parseFloat(text);
+          // If sort on Change or % Change columns, need complex check because 0 value is listed as "unch" instead
         })
       );
 

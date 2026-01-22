@@ -9,12 +9,13 @@ test.describe('Spy API Sort Mutual Funds Leaders', () => {
     await mutualFundsTable.open('api-sort');
   });
 
-  test('API sort on lastPrice field', async ({ page }) => {
+  test('API sort on lastPrice field', async ({ page }, testInfo) => {
     let requestBody;
+    const { apiFundsUrl } = testInfo.project.use;
 
     await test.step('verify API request has correct orderBy parameter', async () => {
       const requestPromise = page.waitForRequest(
-        (request) => request.url().includes('http://localhost:5174/api/funds') && request.method() === 'POST'
+        (request) => request.url().includes(apiFundsUrl) && request.method() === 'POST'
       );
 
       await mutualFundsTable.getColumnHeader('lastPrice').click();

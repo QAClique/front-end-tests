@@ -3,12 +3,11 @@ import MutualFundsTablePage from '../pages/mutualFundsTable.page.js';
 
 ['api-sort', 'local-sort'].forEach((pageType) => {
   test.describe(`Data Validation for page ${pageType}`, () => {
-    test(`validate data for ${pageType} page`, async ({ page }) => {
+    test(`validate data for ${pageType} page`, async ({ page }, testInfo) => {
       const mutualFundsTable = new MutualFundsTablePage(page);
 
-      const responsePromise = page.waitForResponse(
-        (response) => response.url().includes('http://localhost:5174/api/funds') && response.request().method() === 'POST'
-      );
+      const { apiFundsUrl } = testInfo.project.use;
+      const responsePromise = page.waitForResponse((response) => response.url().startsWith(apiFundsUrl) && response.request().method() === 'POST');
 
       await mutualFundsTable.open(pageType);
 
@@ -24,7 +23,7 @@ import MutualFundsTablePage from '../pages/mutualFundsTable.page.js';
         expect(columnCount).toBe(mutualFundsTable.columnNames.length);
       });
 
-      for (let index = 0; index < mutualFundsTable.columnNames.length; index++) {
+      for (let index = 0; index < mutualFundsTable.columnNames.length; index += 1) {
         const column = mutualFundsTable.columnNames[index];
 
         await test.step(`should have the ${column} column in the right spot`, async () => {
@@ -41,8 +40,8 @@ import MutualFundsTablePage from '../pages/mutualFundsTable.page.js';
         });
       }
 
-      for (const column of ['Change', '% Change']) {
-        await test.step(`should color the value in ${column} correctly`, async () => {
+      ['Change', '% Change'].forEach((column) => {
+        test.step(`should color the value in ${column} correctly`, async () => {
           const index = mutualFundsTable.getColumnIndexByLabel(column);
           const rowValue = await mutualFundsTable.getDataValueForColumnRow(index, randomRow);
           const classValue = await mutualFundsTable.getClassForColumnRow(index, randomRow);
@@ -51,7 +50,7 @@ import MutualFundsTablePage from '../pages/mutualFundsTable.page.js';
             expect(hasCorrectClass).toBeTruthy();
           }
         });
-      }
+      });
     });
   });
 });

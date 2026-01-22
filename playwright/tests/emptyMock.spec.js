@@ -9,65 +9,65 @@ import MutualFundsTablePage from '../pages/mutualFundsTable.page.js';
       await page.route('**/api/funds', (route) => {
         if (route.request().method() === 'POST') {
           route.fulfill({
-            status: 200,
+            status:      200,
             contentType: 'application/json',
-            body: JSON.stringify({
+            body:        JSON.stringify({
               data: [],
               meta: {
                 field: {
                   name: {
-                    symbol: 'Symbol',
-                    symbolName: 'Name',
-                    lastPrice: 'Last',
-                    priceChange: 'Change',
-                    percentChange: '% Change',
-                    managedAssets: 'AUM',
-                    tradeTime: 'Time',
-                    quickLink: 'Quick Link',
-                    symbolType: 'Type',
-                    exchange: 'Exchange',
+                    symbol:         'Symbol',
+                    symbolName:     'Name',
+                    lastPrice:      'Last',
+                    priceChange:    'Change',
+                    percentChange:  '% Change',
+                    managedAssets:  'AUM',
+                    tradeTime:      'Time',
+                    quickLink:      'Quick Link',
+                    symbolType:     'Type',
+                    exchange:       'Exchange',
                     symbolCurrency: 'Symbol Currency',
-                    noteText: 'Note Text',
+                    noteText:       'Note Text'
                   },
                   type: {
-                    symbol: 'string',
-                    symbolName: 'string',
-                    lastPrice: 'price',
-                    priceChange: 'priceChange',
-                    percentChange: 'percentChange',
-                    managedAssets: 'integer',
-                    tradeTime: 'time',
-                    quickLink: null,
-                    symbolType: 'string',
-                    exchange: 'string',
+                    symbol:         'string',
+                    symbolName:     'string',
+                    lastPrice:      'price',
+                    priceChange:    'priceChange',
+                    percentChange:  'percentChange',
+                    managedAssets:  'integer',
+                    tradeTime:      'time',
+                    quickLink:      null,
+                    symbolType:     'string',
+                    exchange:       'string',
                     symbolCurrency: 'string',
-                    noteText: null,
+                    noteText:       null
                   },
                   describedBy: {
-                    managedAssets: 'Assets Under Management',
+                    managedAssets: 'Assets Under Management'
                   },
                   display: {
-                    symbol: true,
-                    symbolName: true,
-                    lastPrice: true,
-                    priceChange: true,
-                    percentChange: true,
-                    managedAssets: true,
-                    tradeTime: true,
-                    quickLink: true,
-                    symbolType: false,
-                    exchange: false,
+                    symbol:         true,
+                    symbolName:     true,
+                    lastPrice:      true,
+                    priceChange:    true,
+                    percentChange:  true,
+                    managedAssets:  true,
+                    tradeTime:      true,
+                    quickLink:      true,
+                    symbolType:     false,
+                    exchange:       false,
                     symbolCurrency: false,
-                    noteText: false,
-                  },
-                },
+                    noteText:       false
+                  }
+                }
               },
               count: 0,
-              total: 0,
+              total: 0
             }),
             headers: {
-              'Access-Control-Allow-Origin': '*',
-            },
+              'Access-Control-Allow-Origin': '*'
+            }
           });
         } else {
           route.continue();
