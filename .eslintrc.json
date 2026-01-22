@@ -44,6 +44,7 @@
       "never"
     ],
     "newline-per-chained-call": "off",
+    "no-await-in-loop": "off",
     "no-multi-spaces": [
       "error",
       {
