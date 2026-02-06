@@ -13,7 +13,7 @@ To run the tests you need to install [Node.js](https://nodejs.org/en). Use the l
 
 Each framework is completely independent with its own dependencies and configuration:
 
-```
+```bash
 wdio/
   pages/               - Webdriver.io page objects
   tests/               - Webdriver.io test specs

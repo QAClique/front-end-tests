@@ -22,9 +22,7 @@ class MutualFundsTablePage {
     await this.page.goto(path);
     await this.getSpinner.waitFor({ state: 'hidden' });
     const headers = await this.columnHeaders.all();
-    this.columnMappings = await Promise.all(
-      headers.map((el) => el.getAttribute('data-testid'))
-    );
+    this.columnMappings = await Promise.all(headers.map((el) => el.getAttribute('data-testid')));
   }
 
   /**
