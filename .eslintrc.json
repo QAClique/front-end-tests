@@ -32,11 +32,19 @@
         "exceptAfterSingleLine": true
       }
     ],
+    "max-len": [
+      "error",
+      {
+        "code": 120,
+        "ignoreStrings": true
+      }
+    ],
     "func-names": [
       "error",
       "never"
     ],
     "newline-per-chained-call": "off",
+    "no-await-in-loop": "off",
     "no-multi-spaces": [
       "error",
       {

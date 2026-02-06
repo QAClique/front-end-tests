@@ -1,6 +1,5 @@
-import Page from './page.js';
-
-class MutualFundsTablePage extends Page {
+class MutualFundsTablePage {
+  get spinner()            { return $('div.loading-overlay > div.spinner'); }
   get numberOfFundsField() { return $('[data-testid="number-of-funds-select"]'); }
   get headerRow()          { return $('thead > tr'); }
   get columnHeaders()      { return $$('thead > tr > th'); }
@@ -15,11 +14,18 @@ class MutualFundsTablePage extends Page {
    * @param {string} path - The path to the page
    */
   async open(path) {
-    await super.open(path);
+    await browser.setWindowSize(1440, 1024);
+    await browser.url(path);
     await this.spinner.waitForDisplayed({ reverse: true });
     this.columnMappings = await this.columnHeaders.map(async (el) => el.getAttribute('data-testid'));
   }
 
+  /**
+   * Gets the column header element by name for further actions
+   *
+   * @param {string} name of the column header
+   * @returns {WebdriverIO.Element} column header element
+   */
   getColumnHeader(name) {
     return $(`th[data-testid="${name}"]`);
   }
@@ -63,14 +69,33 @@ class MutualFundsTablePage extends Page {
     return this.fundRows[row].$$('td')[index].getText();
   }
 
+  /**
+   * Gets the class attribute for a specific column and row (by using index values for columns)
+   *
+   * @param {number} index of the column
+   * @param {number} row number
+   * @returns {string} the class attribute for the specified column and row
+   */
   async getClassForColumnRow(index, row) {
     return this.fundRows[row].$$('td')[index].getAttribute('class');
   }
 
+  /**
+   * Get the index value of a column by its label
+   *
+   * @param {string} label (name) of the column
+   * @returns {number} the index of the column
+   */
   getColumnIndexByLabel(label) {
     return this.columnNames.findIndex((column) => column === label);
   }
 
+  /**
+   * Formats a raw date (in seconds since epoch) to YYYY-MM-DD format
+   *
+   * @param {number} rawDate in seconds since epoch
+   * @returns {string} formatted date in YYYY-MM-DD format
+   */
   formatDate(rawDate) {
     const date = new Date(rawDate * 1000);
     const year = date.getFullYear();

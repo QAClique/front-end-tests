@@ -1,5 +1,6 @@
 import assert from 'node:assert';
 import MutualFundsTables from '../pages/mutualFundsTable.page.js';
+import urls from '../config/urls.js';
 
 describe('Funds Count', () => {
   let mock;
@@ -8,7 +9,7 @@ describe('Funds Count', () => {
   let numOfRows;
 
   before(async () => {
-    mock = await browser.mock('http://localhost:5174/api/funds', { method: 'post' });
+    mock = await browser.mock(urls.apiFundsUrl, { method: 'post' });
     await MutualFundsTables.open('api-sort');
     fundsPerPage = await MutualFundsTables.getNumberOfFunds();
     await mock.waitForResponse();

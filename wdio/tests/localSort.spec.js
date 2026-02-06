@@ -1,5 +1,6 @@
 import assert from 'node:assert';
 import MutualFundsTables from '../pages/mutualFundsTable.page.js';
+import urls from '../config/urls.js';
 
 describe('Local Sort Mutual Funds Leaders', () => {
   before(async () => {
@@ -7,9 +8,9 @@ describe('Local Sort Mutual Funds Leaders', () => {
   });
 
   it('should NOT fire API call to sort on "lastPrice" field', async () => {
-    const mock = await browser.mock('http://localhost:5174/api/funds', { method: 'post' });
+    const mock = await browser.mock(urls.apiFundsUrl, { method: 'post' });
     await MutualFundsTables.getColumnHeader('lastPrice').click();
-    // There will be no API calls, so we cannot wait for a response without causing a timeout. We still wait a bit to be sure no call is made
+    // There will be no API calls, so we cannot wait for a response - we wait a fixed time to confirm no call is made
     await browser.pause(1000);
     assert(mock.calls.length === 0, 'Expected: no API call is made but there was');
   });
@@ -29,7 +30,7 @@ describe('Local Sort Mutual Funds Leaders', () => {
       const cell = await row.$('td[data-testid="lastPrice"]');
       const text = await cell.getText();
       return parseFloat(text);
-      // If we sorted on Change or % Change columns, this would be more complex because 0 value is listed as "unch" which sorts badly!
+      // If sort on Change or % Change columns, need complex check because 0 value is listed as "unch" instead
     });
 
     const sortedValues = [...displayedValues].sort((a, b) => a - b);

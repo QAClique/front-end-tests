@@ -1,16 +1,17 @@
 import assert from 'node:assert';
-import MutualFundsTables from '../pages/mutualFundsTable.page.js';
+import MutualFundsTable from '../pages/mutualFundsTable.page.js';
+import urls from '../config/urls.js';
 
 describe('Spy API Sort Mutual Funds Leaders', () => {
   let requestBody;
 
   before(async () => {
-    await MutualFundsTables.open('api-sort');
+    await MutualFundsTable.open('api-sort');
   });
 
   it('should fire API call to sort on "lastPrice" field', async () => {
-    const mock = await browser.mock('http://localhost:5174/api/funds', { method: 'post' });
-    await MutualFundsTables.getColumnHeader('lastPrice').click();
+    const mock = await browser.mock(urls.apiFundsUrl, { method: 'post' });
+    await MutualFundsTable.getColumnHeader('lastPrice').click();
     await mock.waitForResponse();
     requestBody = JSON.parse(mock.calls[0].postData);
     console.log(requestBody);

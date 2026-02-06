@@ -1,5 +1,6 @@
 import assert from 'node:assert';
 import MutualFundsTables from '../pages/mutualFundsTable.page.js';
+import urls from '../config/urls.js';
 
 ['api-sort', 'local-sort'].forEach((page) => {
   describe(`Data Validation for page ${page}`, () => {
@@ -9,7 +10,7 @@ import MutualFundsTables from '../pages/mutualFundsTable.page.js';
     let randomRow;
 
     before(async () => {
-      mock = await browser.mock('http://localhost:5174/api/funds', { method: 'post' });
+      mock = await browser.mock(urls.apiFundsUrl, { method: 'post' });
       await MutualFundsTables.open(page);
       await mock.waitForResponse();
       apiData = mock.calls[0].body.data;
@@ -27,7 +28,8 @@ import MutualFundsTables from '../pages/mutualFundsTable.page.js';
       MutualFundsTables.columnNames.forEach((column, index) => {
         it(`should have the ${column} column in the right spot`, async () => {
           const columnName = await MutualFundsTables.columnHeaders[index].getText();
-          assert(columnName === column, `Expected: column '${column}' is in the right spot, but found '${columnName}' instead`);
+          assert(columnName === column,
+            `Expected: column '${column}' is in the right spot, but found '${columnName}' instead`);
         });
 
         it(`should match the ${column} column value with the API data`, async () => {
@@ -46,7 +48,7 @@ import MutualFundsTables from '../pages/mutualFundsTable.page.js';
           const classValue = await MutualFundsTables.getClassForColumnRow(index, randomRow);
           const result = parseFloat(rowValue) >= 0 ? classValue.includes('pos') : classValue.includes('neg');
           if (apiData[randomRow][MutualFundsTables.columnMappings[index]] !== 'unch') {
-            assert(result, `Expected: Color formatting for '${column}' column in row ${randomRow} is correct but was not.`);
+            assert(result, `Expected: Color format for '${column}' column in row ${randomRow} is correct but was not.`);
           }
         });
       });

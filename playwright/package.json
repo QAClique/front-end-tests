@@ -1,0 +1,18 @@
+{
+  "name": "front-end-tests-playwright",
+  "version": "0.1.0",
+  "description": "Front End test cases example using Playwright framework for \"Stop Testing End to End\" Presentation",
+  "type": "module",
+  "scripts": {
+    "test": "playwright test",
+    "test:single": "playwright test --grep",
+    "test:ui": "playwright test --ui"
+  },
+  "dependencies": {
+    "@playwright/test": "^1.48.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.57.1",
+    "eslint-config-airbnb-base": "^15.0.0"
+  }
+}
