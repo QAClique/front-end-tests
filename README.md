@@ -2,10 +2,10 @@
 
 ## Getting Started
 
-This is a simplified set of Front End tests used in the "Stop Testing End to End" Presentation. It requires the demo Web App from <https://github.com/QAClique/demo-webapp>. This project includes examples using two popular testing frameworks:
+This is a simplified set of Front End tests used in the "Stop Testing End to End" Presentation. It requires the demo Web App from <https://github.com/QAClique/demo-webapp>. This project includes the same test examples using two popular testing frameworks:
 
-- **[Webdriver.io](https://webdriver.io)** - WebDriver-based E2E testing framework
-- **[Playwright](https://playwright.dev)** - Modern browser automation library
+- **[Webdriver.io](https://webdriver.io)**
+- **[Playwright](https://playwright.dev)** (using NodeJS/JavaScript)
 
 To run the tests you need to install [Node.js](https://nodejs.org/en). Use the latest LTS version, but anything newer will work as well.
 
@@ -15,21 +15,21 @@ Each framework is completely independent with its own dependencies and configura
 
 ```
 wdio/
-  pages/           - Webdriver.io page objects
-  tests/           - Webdriver.io test specs
-  wdio.conf.js     - Webdriver.io configuration
-  package.json     - Webdriver.io dependencies
+  pages/               - Webdriver.io page objects
+  tests/               - Webdriver.io test specs
+  wdio.conf.js         - Webdriver.io configuration
+  package.json         - Webdriver.io dependencies
 
 playwright/
-  pages/           - Playwright page objects
-  tests/           - Playwright test specs
+  pages/               - Playwright page objects
+  tests/               - Playwright test specs
   playwright.config.js - Playwright configuration
-  package.json     - Playwright dependencies
+  package.json         - Playwright dependencies
 ```
 
 ## Installation
 
-Clone the repository and install dependencies for your chosen framework:
+There is no reason to use both frameworks unless you are trying to compare them. Install only what is needed for the framework that is of interest to you. Start by clone the repository and install dependencies for your chosen framework:
 
 ### Webdriver.IO Installation
 
@@ -43,10 +43,11 @@ npm run install:wdio
 npm run install:playwright
 ```
 
+You can also simply move to the `playwright` or `wdio` directory and do `npm install` from there.
+
 ## Executing the Tests
 
-Google Chrome is used as the default browser, but you can change this through setting the
-`BROWSER` environment variable to `firefox` or other.
+There are extensions in Visual Studio Code for each framework if you want to run by simply clicking a button (easier). Use the following instructions to run without the extensions.
 
 ### Webdriver.io
 
@@ -74,8 +75,8 @@ Or use wdio CLI directly:
 
 ```bash
 cd wdio
-npx wdio wdio.conf.js --spec tests/apiSort.spec.js
-npx wdio wdio.conf.js  # to run all tests
+npx wdio --spec tests/apiSort.spec.js
+npx wdio  # to run all tests
 ```
 
 ### Playwright
@@ -104,7 +105,7 @@ Or navigate to the playwright folder and run directly:
 cd playwright
 npm test
 npm run test:single -- "API Sort"
-npm run test:ui
+npm run test:ui # to run all tests
 ```
 
 View HTML test results:
@@ -116,8 +117,7 @@ npx playwright show-report
 
 ## Browser Configuration
 
-Both frameworks default to Chrome. You can change the browser by setting the `BROWSER`
-environment variable:
+Both frameworks default to Chrome. You can change the browser by setting the `BROWSER` environment variable:
 
 ### Webdriver.io Configuration
 
