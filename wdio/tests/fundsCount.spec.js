@@ -1,6 +1,6 @@
 import assert from 'node:assert';
 import MutualFundsTables from '../pages/mutualFundsTable.page.js';
-import { urls } from '../config/urls.js';
+import urls from '../config/urls.js';
 
 describe('Funds Count', () => {
   let mock;

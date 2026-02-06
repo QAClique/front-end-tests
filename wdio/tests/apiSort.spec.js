@@ -1,6 +1,6 @@
 import assert from 'node:assert';
 import MutualFundsTable from '../pages/mutualFundsTable.page.js';
-import { urls } from '../config/urls.js';
+import urls from '../config/urls.js';
 
 describe('Spy API Sort Mutual Funds Leaders', () => {
   let requestBody;
