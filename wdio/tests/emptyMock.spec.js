@@ -18,7 +18,7 @@ import urls from '../config/urls.js';
             name: {
               symbol:         'Symbol',
               symbolName:     'Name',
-              lastPrice:      'Last',
+              lastPrice:      'Latest',
               priceChange:    'Change',
               percentChange:  '% Change',
               managedAssets:  'AUM',
