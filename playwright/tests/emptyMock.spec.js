@@ -18,7 +18,7 @@ import MutualFundsTablePage from '../pages/mutualFundsTable.page.js';
                   name: {
                     symbol:         'Symbol',
                     symbolName:     'Name',
-                    lastPrice:      'Last',
+                    lastPrice:      'Latest',
                     priceChange:    'Change',
                     percentChange:  '% Change',
                     managedAssets:  'AUM',
